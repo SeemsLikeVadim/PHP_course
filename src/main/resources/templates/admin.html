@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5%22%3E">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link href="css/style.css" rel="stylesheet" />
+    <link type="image/x-icon" rel="shortcut icon" href="C:\Users\ohrem\IdeaProjects\PHP_course2\src\main\resources\static\favicon.ico">
+    <title>Сайт онлайн голосования</title>
+</head>
+<body>
+<!-- Navbar -->
+<nav class="navbar navbar-dark bg-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="/" th:href="@{/}">Онлайн голосование</a>
+        <button type="button" sec:authorize="hasRole('ROLE_ADMIN')"  class="btn btn-light"><a href="/"  th:href="@{/admin} " style="color:black;">Голоса</a></button>
+        <button type="button" sec:authorize="!isAuthenticated()" class="btn btn-light"><a href="/"  th:href="@{/login} " style="color:black;">Авторизация</a></button>
+        <button type="button" sec:authorize="isAuthenticated()" class="btn btn-light"><a href="/"  th:href="@{/logout} " style="color:black;">Выход</a></button>
+    </div>
+</nav>
+<section class="about">
+    <div class="container">
+        <div class="row">
+            <div class="col-12" style="margin-top: 50px;">
+                <h2 class="text-center text-uppercase mb-4" style="color: black">Список депутатов</h2>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <table class="table color2">
+            <thead>
+            <tr>
+                <th scope="col">Имя</th>
+                <th scope="col">Партия</th>
+                <th scope="col">Количество голосов</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr data-th-each="deputy : ${deputies}">
+                <td data-th-text="${deputy.name}"></td>
+                <td data-th-text="${deputy.party}"></td>
+                <td data-th-text="${deputy.votes}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</section>
+<!-- Optional JavaScript; choose one of the two! -->
+
+<!-- Option 1: Bootstrap Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+
+<!-- Option 2: Separate Popper and Bootstrap JS -->
+<!--
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
+-->
+</body>
+</html>
